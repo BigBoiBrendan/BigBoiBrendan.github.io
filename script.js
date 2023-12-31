@@ -33,13 +33,31 @@ document.addEventListener("DOMContentLoaded", function () {
         // Calculate the time until the next update interval
         const minutesUntilNextUpdate = 30 - (minutesFromMidnight % 30);
 
+        // Calculate the next rotation
+        const nextRotation = calculateNextRotation(currentRange);
+
         // Update the timer content
         timerElement.textContent = `Next rotation in ${minutesUntilNextUpdate} minutes`;
+        
+        // Update the next rotation information
+        nextRotationElement.textContent = `Next rotation: ${nextRotation}`;
     }
 
-    // Get the dynamic text element and timer element
+    // Function to calculate the next rotation based on the current time range
+    function calculateNextRotation(currentRange) {
+        if (currentRange < 30) {
+            return "DUO";
+        } else if (currentRange < 60) {
+            return "TRIO";
+        } else {
+            return "SOLO";
+        }
+    }
+
+    // Get the dynamic text element, timer element, and next rotation element
     const dynamicTextElement = document.getElementById("dynamicText");
     const timerElement = document.getElementById("timer");
+    const nextRotationElement = document.getElementById("nextRotation");
 
     // Update the dynamic text initially
     updateDynamicText();
